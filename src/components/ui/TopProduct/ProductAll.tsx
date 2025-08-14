@@ -45,7 +45,7 @@ export default function ProductAll() {
     <Box sx={{ p: 3, backgroundColor: '#fff' }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
         <Typography variant="h4" sx={{ fontWeight: 'bold', color: 'green' }}>
-          Tất cả sản phẩm
+          Product All
         </Typography>
       </Box>
 

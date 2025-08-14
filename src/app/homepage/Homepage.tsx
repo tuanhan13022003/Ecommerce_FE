@@ -13,6 +13,10 @@ const StyledBox = styled(Box)({
   backgroundColor: '#fff',
 });
 
+interface ApiResponse {
+  products: Product[];
+}
+
 export interface Product {
   product_id: number;
   name: string;
@@ -25,16 +29,24 @@ export default function HomePage() {
   const [error, setError] = useState<string | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+        setIsLoading(true)
         const data = await getAllProducts();
+        if (!data || !Array.isArray(data.products)) {
+          throw new Error('Invalid API response');
+        }
         setProducts(data.products.slice(0, 8));
         setError(null);
       } catch (error) {
         console.error('Error fetching products:', error);
         setError('Failed to load products');
+      }
+      finally {
+        setIsLoading(false); 
       }
     };
 
